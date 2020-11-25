@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Hotel;
-use App\Service\RandomNumberGenerator;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\RandomNumberGenerator;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\TokenAuthenticatedController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
-class IndexController extends AbstractController {
+class IndexController extends AbstractController implements TokenAuthenticatedController {
 
     /**
      * @Route("/")

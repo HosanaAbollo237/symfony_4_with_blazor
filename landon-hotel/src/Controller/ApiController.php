@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Hotel;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\TokenAuthenticatedController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class ApiController extends AbstractController {
+class ApiController extends AbstractController implements TokenAuthenticatedController {
 
     /**
      * @Route("/api/rooms")
