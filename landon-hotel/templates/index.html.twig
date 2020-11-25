@@ -112,12 +112,24 @@
                 </article>
 
             </div> <!-- hotelinfo -->
-
+            
             <div class="scene" id="rooms">
                 <header>
                     <h1>Guest Rooms</h1>
                     <p>Our guest rooms feature sumptuous classic furnishings that evoke visitors...</p>
                 </header>
+
+
+                <!-- OUTPUT HOTELS FROM DB-->
+
+                {% for hotel in hotels%}
+                    <article class="room fullheight" id="{{ hotel.tag }}">
+                        <section class="content">
+                            <h1>{{hotel.name }} - {{ hotel.type }}</h1>
+                            {{ hotel.description    }}
+                        </section>
+                    </article>
+                {% endfor %}
             </div>
             <article id="areadining">
                 <h1>Dining in the area</h1>

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Hotel;
 use App\Service\RandomNumberGenerator;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 
 class IndexController extends AbstractController {
@@ -17,10 +19,17 @@ class IndexController extends AbstractController {
 
         $year = $rndNumGen->getRandomNymber();
 
+
+        $hotels = $this->getDoctrine()
+            ->getRepository(Hotel::class)
+            ->findAllBelowPrice(100);
+
+
         $logger->info('Jdot');
 
         return $this->render('index.html.twig', [
-            'year' => $year
+            'year' => $year,
+            'hotels' => $hotels,
         ]);
 
     }
