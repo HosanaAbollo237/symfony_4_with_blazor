@@ -22,13 +22,22 @@ class HotelRepository extends ServiceEntityRepository
 
     public function findAllBelowPrice(float $price): ?array {
 
-        return $this->createQueryBuilder('h') // alias of the table hotel
-        ->andWhere('h.price > :price') // price less than price parameter that will be set next
-        ->setParameter('price', $price) // 1arg: name param (key) in the where clause, 2eme param is the value of the price
-        ->orderBy('h.id', 'ASC') 
-        ->setMaxResults(3)
-        ->getQuery() // take all the methods above and make a query with it
-        ->getResult(); // run the query hydrate those entities and return us an array of entity
+       // return $this->createQueryBuilder('h') // alias of the table hotel
+       // ->andWhere('h.price > :price') // price less or over than price parameter that will be set next
+       // ->setParameter('price', $price) // 1arg: name param (key) in the where clause, 2eme param is the value of the price
+       // ->orderBy('h.id', 'ASC') 
+       // ->setMaxResults(3)
+       // ->getQuery() // take all the methods above and make a query with it
+       // ->getResult(); // run the query hydrate those entities and return us an array of entity
+
+        // Custom query with doctrine, exact the same query that above 
+       $entityManager = $this->getEntityManager();
+       return $entityManager->createQuery('
+       SELECT h from App\Entity\Hotel h 
+       where h.price < :price
+       ORDER BY h.id ASC')
+       ->setParameter('price', $price)
+       ->execute();
     }
 
     // /**
